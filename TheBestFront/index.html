@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3.js Визуализация Реки и Притоков</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        .link {
+            fill: none;
+            stroke: dodgerblue;
+            stroke-width: 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+<svg id="tree" width="1200" height="800"></svg>
+
+
+<script>
+
+    var data = {
+        "name": "Река",
+        "children": [
+            {"name": "Алей \n  10 km"},
+            {"name": "Иня \n  20 km"},
+            {"name": "Песчаная \n  30 km"},
+            {"name": ""}
+        ]
+    };
+
+    var treeLayout = d3.tree().size([700, 1800]);
+    var root = d3.hierarchy(data);
+    treeLayout(root);
+
+
+    var сoordinates = [{x: 100, y: 100}, {x: 600, y: 300}, {x:100, y: 500}, {x: 350, y: 800}]; // Пример координат для двух притоков
+
+
+    var svg = d3.select("#tree");
+
+    // Отрисовка связей между узлами
+
+
+    var links = svg.selectAll(".link")
+        .data(root.descendants().slice(1))
+        .enter().append("path")
+        .attr("class", "link")
+        .attr("d", function(d, i) {
+            if (d.parent) {
+                return "M" + сoordinates[i].x + "," + сoordinates[i].y +
+                    "H" + d.parent.x +
+                    "V" + d.parent.y;
+            }
+        });
+
+
+
+    svg.selectAll(".link-label")
+        .data(root.descendants().slice(1)) // Исключаем корневой узел
+        .enter().append("text")
+        .attr("class", "link-label")
+        .attr("x", function(d, i) { return (сoordinates[i].x + d.parent.x) / 2; }) // Определение x координаты для текста
+        .attr("y", function(d, i) { return сoordinates[i].y - 30 }) // Определение y координаты для текста
+        .html(function(d, i) {
+            return d.data.name.split('\n').map(function(name, index) {
+                return '<tspan x="' + ((сoordinates[i].x + d.parent.x) / 2) + '" dy="' + (index * 15) + '">' + name + '</tspan>';
+            }).join('');
+        });
+
+
+    svg.append("circle")
+        .attr("cx", 350)
+        .attr("cy", 400)
+        .attr("r", 20)
+        .attr("fill", "red");
+
+    svg.append("circle")
+        .attr("cx", 350)
+        .attr("cy", 700)
+        .attr("r", 15)
+        .attr("fill", "red");
+
+    svg.append("text")
+        .attr("x", 380)
+        .attr("y", 705)
+        .text("Колывань")
+        .attr("fill", "black");
+
+    svg.append("text")
+        .attr("x", 375)
+        .attr("y", 405)
+        .text("Новосибирск")
+        .attr("fill", "black");
+
+
+    svg.append("text")
+        .attr("x", 370)
+        .attr("y", 200)
+        .text("10km")
+        .attr("fill", "black");
+
+    svg.append("path")
+        .attr("d", "M 330,620 A 20,20 0 0,1 370,620")
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .attr("stroke-width", 10);
+
+
+
+</script>
+</body>
+</html>
