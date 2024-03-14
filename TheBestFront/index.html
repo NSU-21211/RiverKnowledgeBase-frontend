@@ -12,14 +12,133 @@
             stroke-width: 15px;
         }
 
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #text-container {
+            background-color: white;
+            width: 30%;
+            height: 800px;
+            padding-right: 20px;
+        }
+
+        #content-wrapper_horizontal {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        #image-container {
+            width: 25%;
+        }
+
+        #image-container img {
+            width: 100%;
+            height: auto;
+        }
+
+
+        #content-wrapper_vertical {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 40px;
+        }
+
+        #scrollable-container {
+            width: 100%;
+            height: 600px;
+            overflow: auto;
+            margin-bottom: 20px;
+        }
+
+        #tree {
+            width: 100%;
+            height: 2000px;
+        }
+
+        #legend {
+            background-color: white;
+            width: 100%;
+            height: 200px;
+            padding-bottom: 20px;
+        }
+
     </style>
 </head>
-<body>
+<body bgcolor="#d3d3d3">
 
-<svg id="tree" width="1200" height="800"></svg>
+<h1 id="dynamic-heading"></h1>
+
+<div id="content-wrapper_horizontal">
+
+    <div id="text-container">
+        <p id="river-name">Крутая речка</p>
+        <p id="river-length">Длина</p>
+        <p id="river-tributaries">Кол-во притоков</p>
+        <p id="river-bridges">Кол-во мостов</p>
+        <p id="river-map">Обь на карте: <a href="#" id="map-link">ССЫЛКА</a></p>
+    </div>
+
+    <div id="image-container">
+        <img src="scale_1200.jpeg" alt="Описание изображения">
+    </div>
+
+    <div id="content-wrapper_vertical">
+        <div id="scrollable-container">
+            <svg id="tree"></svg>
+        </div>
+
+        <div id="legend">
+            <svg>
+                <text x="60" y="35" font-family="Arial" font-size="16px" fill="black">Город - </text>
+                <circle cx="150" cy="28" r="20" fill="red" />
+
+                <text x="60" y="85" font-family="Arial" font-size="16px" fill="black">ПГТ - </text>
+                <circle cx="120" cy="78" r="15" fill="red" />
+
+
+                <text x="60" y="135" font-family="Arial" font-size="16px" fill="black">Мост - </text>
+                <path d="M 120,140 A 20,20 0 0,1 160,140" stroke="black" fill="none" stroke-width="10" />
+
+
+            </svg>
+        </div>
+
+    </div>
+
+
+</div>
+
 
 
 <script>
+
+
+    var headingElement = document.getElementById("dynamic-heading");
+
+    var dynamicText = "Река Обь(Динамический заголовок)";
+
+    // Устанавливаем текст элемента <h1>
+    headingElement.textContent = dynamicText;
+
+
+    var scrollContainer = document.getElementById("scrollable-container");
+    scrollContainer.scrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
+
+    var river_name = document.getElementById('river-name').textContent = 'Длина(Динамически изменяемый текст)';
+    var river_length = document.getElementById('river-length').textContent = 'Длина(Динамически изменяемый текст)';
+    var river_tributaries = document.getElementById('river-tributaries').textContent = 'Кол-во притоков(Динамически изменяемый текст)';
+    var river_bridges = document.getElementById('river-bridges').textContent = 'Обь на карте(Динамически изменяемый текст)';
+    var map_link = document.getElementById('map-link').href = 'новая ссылка на карту';
+
+
 
     var data = {
         "name": "Река",
@@ -36,10 +155,12 @@
     treeLayout(root);
 
 
-    var сoordinates = [{x: 100, y: 100}, {x: 600, y: 300}, {x:100, y: 500}, {x: 350, y: 800}]; // Пример координат для двух притоков
+    var сoordinates = [{x: 100, y: 100}, {x: 600, y: 300}, {x: 100, y: 500}, {x: 350, y: 800}];
 
 
     var svg = d3.select("#tree");
+
+    var internal = d3.select("#legend");
 
     // Отрисовка связей между узлами
 
@@ -48,7 +169,7 @@
         .data(root.descendants().slice(1))
         .enter().append("path")
         .attr("class", "link")
-        .attr("d", function(d, i) {
+        .attr("d", function (d, i) {
             if (d.parent) {
                 return "M" + сoordinates[i].x + "," + сoordinates[i].y +
                     "H" + d.parent.x +
@@ -57,15 +178,18 @@
         });
 
 
-
     svg.selectAll(".link-label")
-        .data(root.descendants().slice(1)) // Исключаем корневой узел
+        .data(root.descendants().slice(1))
         .enter().append("text")
         .attr("class", "link-label")
-        .attr("x", function(d, i) { return (сoordinates[i].x + d.parent.x) / 2; }) // Определение x координаты для текста
-        .attr("y", function(d, i) { return сoordinates[i].y - 30 }) // Определение y координаты для текста
-        .html(function(d, i) {
-            return d.data.name.split('\n').map(function(name, index) {
+        .attr("x", function (d, i) {
+            return (сoordinates[i].x + d.parent.x) / 2;
+        })
+        .attr("y", function (d, i) {
+            return сoordinates[i].y - 30
+        })
+        .html(function (d, i) {
+            return d.data.name.split('\n').map(function (name, index) {
                 return '<tspan x="' + ((сoordinates[i].x + d.parent.x) / 2) + '" dy="' + (index * 15) + '">' + name + '</tspan>';
             }).join('');
         });
@@ -102,11 +226,23 @@
         .text("10km")
         .attr("fill", "black");
 
+    svg.append("text")
+        .attr("x", 370)
+        .attr("y", 1900)
+        .text("brawlik bablik")
+        .attr("fill", "black");
+
     svg.append("path")
         .attr("d", "M 330,620 A 20,20 0 0,1 370,620")
         .attr("fill", "none")
         .attr("stroke", "black")
         .attr("stroke-width", 10);
+
+    internal.append("circle")
+        .attr("cx", 10)
+        .attr("cy", 10)
+        .attr("r", 15)
+        .attr("fill", "red");
 
 
 
