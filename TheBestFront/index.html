@@ -78,15 +78,18 @@
 <div id="content-wrapper_horizontal">
 
     <div id="text-container">
-        <p id="river-name">Крутая речка</p>
-        <p id="river-length">Длина</p>
-        <p id="river-tributaries">Кол-во притоков</p>
-        <p id="river-bridges">Кол-во мостов</p>
-        <p id="river-map">Обь на карте: <a href="#" id="map-link">ССЫЛКА</a></p>
+        <p id="river_name">Название: </p>
+        <p id="river_length">Длина: </p>
+        <p id="river_area">Площадь: </p>
+        <p id="river_origin">Исток водотока: </p>
+        <p id="river_territorial">Административная территория: </p>
+        <p id="river_tributaries">Притоки: </p>
+        <p id="river_country">Страна: </p>
+        <p id="river_mouth">Впадает в: </p>
     </div>
 
     <div id="image-container">
-        <img src="scale_1200.jpeg" alt="Описание изображения">
+        <img id="river_image" alt="Описание изображения">
     </div>
 
     <div id="content-wrapper_vertical">
@@ -119,10 +122,56 @@
 
 <script>
 
+    const jsonString = `{
+        "riverLink": "http://www.wikidata.org/entity/Q973",
+        "label": "Обь",
+        "length": "3650",
+        "watershedArea": 2990000,
+        "image": "http://commons.wikimedia.org/wiki/Special:FilePath/Ob%20u%20Barnaulu.jpg",
+        "tributaries": [
+            "Панинский",
+            "Чемровка",
+            "Алей",
+            "Квеш",
+            "Ларьёган",
+            "Вычьях",
+            "Большая Мегипугольская",
+            "Ламская",
+            "Хатасъюган",
+            "Повалиха"
+        ],
+        "origin": ["Катунь"],
+        "administrativeTerritorial": "Ханты-Мансийский автономный округ — Югра",
+        "mouth": ["Карское море"],
+        "country": "Россия"
+    }`;
+
+
+    const riverObj = JSON.parse(jsonString);
+
+    var river_name = document.getElementById('river_name');
+    var river_length = document.getElementById('river_length');
+    var river_tributaries = document.getElementById('river_tributaries');
+    var river_area = document.getElementById('river_area');
+    var river_origin = document.getElementById('river_origin');
+    var river_territorial = document.getElementById('river_territorial');
+    var river_mouth = document.getElementById('river_mouth');
+    var river_country = document.getElementById('river_country');
+    var river_image = document.getElementById('river_image');
+
+    river_name.textContent += riverObj.label;
+    river_length.textContent += riverObj.length + ' км';
+    river_area.textContent += riverObj.watershedArea + ' км^2';
+    river_tributaries.textContent += riverObj.tributaries.join(", ");
+    river_origin.textContent += riverObj.origin.join(", ");
+    river_territorial.textContent += riverObj.administrativeTerritorial;
+    river_mouth.textContent += riverObj.mouth.join(", ");
+    river_country.textContent += riverObj.country;
+    river_image.src = riverObj.image;
 
     var headingElement = document.getElementById("dynamic-heading");
 
-    var dynamicText = "Река Обь(Динамический заголовок)";
+    var dynamicText = "Река " + riverObj.label;
 
     // Устанавливаем текст элемента <h1>
     headingElement.textContent = dynamicText;
@@ -130,14 +179,6 @@
 
     var scrollContainer = document.getElementById("scrollable-container");
     scrollContainer.scrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-
-
-    var river_name = document.getElementById('river-name').textContent = 'Длина(Динамически изменяемый текст)';
-    var river_length = document.getElementById('river-length').textContent = 'Длина(Динамически изменяемый текст)';
-    var river_tributaries = document.getElementById('river-tributaries').textContent = 'Кол-во притоков(Динамически изменяемый текст)';
-    var river_bridges = document.getElementById('river-bridges').textContent = 'Обь на карте(Динамически изменяемый текст)';
-    var map_link = document.getElementById('map-link').href = 'новая ссылка на карту';
-
 
 
     var data = {
@@ -243,6 +284,9 @@
         .attr("cy", 10)
         .attr("r", 15)
         .attr("fill", "red");
+
+
+
 
 
 
