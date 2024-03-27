@@ -16,33 +16,10 @@
 <script setup lang="ts">
 import RiverImage from '@/components/info/RiverImage.vue'
 import { onMounted } from 'vue'
+import { riverInfoResponseJsonMock } from '@/assets/mocks/mocks'
 
 // TODO: add dynamic parameters
-const parseRiverInfo = () => {
-	const riverInfoResponseJson = `{
-        "riverLink": "http://www.wikidata.org/entity/Q973",
-        "label": "Обь",
-        "length": "3650",
-        "watershedArea": 2990000,
-        "image": "http://commons.wikimedia.org/wiki/Special:FilePath/Ob%20u%20Barnaulu.jpg",
-        "tributaries": [
-        "Панинский",
-        "Чемровка",
-        "Алей",
-        "Квеш",
-        "Ларьёган",
-        "Вычьях",
-        "Большая Мегипугольская",
-        "Ламская",
-        "Хатасъюган",
-        "Повалиха"
-        ],
-        "origin": ["Катунь"],
-        "administrativeTerritorial": "Ханты-Мансийский автономный округ — Югра",
-        "mouth": ["Карское море"],
-        "country": "Россия"
-    }`
-
+const parseRiverInfo = (riverInfoResponseJson: string) => {
 	// TODO: add class for it
 	const riverObj = JSON.parse(riverInfoResponseJson)
 
@@ -92,7 +69,8 @@ const parseRiverInfo = () => {
 }
 
 onMounted(() => {
-	parseRiverInfo()
+	let riverInfoResponseJson = riverInfoResponseJsonMock
+	parseRiverInfo(riverInfoResponseJson)
 })
 </script>
 

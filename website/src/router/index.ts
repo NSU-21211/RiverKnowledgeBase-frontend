@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import RiverListView from '@/views/RiverListView.vue'
 import HomeView from '@/views/HomeView.vue'
 import RiverInfoView from '@/views/RiverInfoView.vue'
 import LinearSchemeView from '@/views/LinearSchemeView.vue'
-import RiverListView from '@/views/RiverListView.vue'
 
 const router = createRouter({
 	routes: [

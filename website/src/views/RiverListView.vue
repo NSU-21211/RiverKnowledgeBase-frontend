@@ -18,11 +18,11 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { riverListMock } from '@/assets/mocks/mocks'
 
 const router = useRouter()
 
-// TODO: call backend API
-const rivers = ['Обь', 'Енисей', 'Катунь']
+const rivers = riverListMock
 
 const getRiverInfo = (riverName: string) => {
 	router.push({ name: 'info', params: { riverName: riverName } })

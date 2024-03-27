@@ -6,18 +6,18 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { imageSourceMock } from '@/assets/mocks/mocks'
 
 const imageSrc = ref<HTMLImageElement>()
 
 // TODO: add dynamic value
-const setImageSource = () => {
-	let imageSource =
-		'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/March_evening._The_sun_fell_across_the_Ob_river.jpg/1599px-March_evening._The_sun_fell_across_the_Ob_river.jpg'
+const setImageSource = (imageSource: string) => {
 	imageSrc.value!.src = imageSource
 }
 
 onMounted(() => {
-	setImageSource()
+	let imageSource = imageSourceMock
+	setImageSource(imageSource)
 })
 </script>
 
