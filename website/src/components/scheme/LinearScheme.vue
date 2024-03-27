@@ -9,20 +9,13 @@
 <script setup lang="ts">
 import * as d3 from 'd3'
 import { onMounted, ref } from 'vue'
+import { linearSchemeDataMock, linearSchemeCoordinatesMock } from '@/assets/mocks/mocks'
 
 let linearSchemeSvg = ref<SVGSVGElement | null>(null)
 
 const displayLinearScheme = () => {
 	// FIXME: add dynamic data
-	const data = {
-		name: 'Река',
-		children: [
-			{ name: 'Алей \n  10 km' },
-			{ name: 'Иня \n  20 km' },
-			{ name: 'Песчаная \n  30 km' },
-			{ name: '' }
-		]
-	}
+	const data = linearSchemeDataMock
 
 	const treeWidth = 700
 	const treeHeight = 1800
@@ -31,12 +24,7 @@ const displayLinearScheme = () => {
 	let root: d3.HierarchyNode<any> = d3.hierarchy(data)
 	treeLayout(root)
 
-	const coordinates = [
-		{ x: 100, y: 100 },
-		{ x: 600, y: 300 },
-		{ x: 100, y: 500 },
-		{ x: 350, y: 800 }
-	]
+	const coordinates = linearSchemeCoordinatesMock
 
 	let svg = d3.select(linearSchemeSvg.value)
 	let internal = d3.select<SVGSVGElement, unknown>('#legend')
