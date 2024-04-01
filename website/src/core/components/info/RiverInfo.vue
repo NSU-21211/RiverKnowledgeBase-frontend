@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import RiverImage from '@/components/info/RiverImage.vue'
+import RiverImage from '@/core/components/info/RiverImage.vue'
 import { onMounted } from 'vue'
 import { riverInfoResponseJsonMock } from '@/assets/mocks/mocks'
 

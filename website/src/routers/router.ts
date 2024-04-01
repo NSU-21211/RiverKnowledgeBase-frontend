@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import RiverListView from '@/views/RiverListView.vue'
-import HomeView from '@/views/HomeView.vue'
-import RiverInfoView from '@/views/RiverInfoView.vue'
-import LinearSchemeView from '@/views/LinearSchemeView.vue'
+import RiverListView from '@/core/views/RiverListView.vue'
+import HomeView from '@/core/views/HomeView.vue'
+import RiverInfoView from '@/core/views/RiverInfoView.vue'
+import LinearSchemeView from '@/core/views/LinearSchemeView.vue'
 
 const router = createRouter({
 	routes: [
@@ -12,18 +12,19 @@ const router = createRouter({
 			component: HomeView
 		},
 		{
-			path: '/river/list',
+			path: '/river/list/:riverName',
 			name: 'list',
+			props: true,
 			component: RiverListView
 		},
 		{
-			path: '/river/info/:riverName',
+			path: '/river/info/:riverName', // TODO: user wikidataId instead of riverName
 			name: 'info',
 			component: RiverInfoView,
 			props: true,
 			children: [
 				{
-					path: '/river/scheme',
+					path: '/river/scheme/:riverName',
 					name: 'scheme',
 					component: LinearSchemeView
 				}
