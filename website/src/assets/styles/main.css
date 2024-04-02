@@ -80,11 +80,82 @@ body {
 	font-size: 16px;
 }
 
+#home {
+	background-color: #000000;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+#river-svg-logo {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 65%;
+	height: 65%;
+	background-image: url("@/assets/images/river-logo.svg");
+	background-size: contain;
+	background-repeat: no-repeat;
+	z-index: 0;
+
+}
+
+.search-title {
+	text-transform: uppercase;
+	font-size: 100px;
+	font-weight: 900;
+	color: #ffffff;
+	text-align: center;
+	margin-top: 3%;
+}
+
 #river-search {
 	font-size: 20px;
 	font-weight: 600;
 }
 
-.search-title {
-	text-transform: uppercase;
+#river-search-container {
+	display: flex;
+	justify-content: center;
+	width: 40%;
+	z-index: 999;
+}
+
+.center {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+#river-name-input {
+	border-radius: 35px 30px 30px 35px;
+	text-align: center;
+	font-size: 30px;
+	font-weight: 700;
+	color: #f4f4f4;
+	width: 55%;
+	background-color: #b3b3b3;
+	border-color: #ffffff;
+	margin-right: 1%;
+}
+
+#river-name-input::placeholder {
+	color: #f4f4f4;
+	opacity: 0.7;
+}
+
+#confirm-river-button {
+	border-radius: 35px 30px 30px 35px;
+	text-align: center;
+	cursor: pointer;
+	font-size: 30px;
+	font-weight: 700;
+	width: 25%;
+	color: #a9a9a9;
+	background-color: #f4f4f4;
+	border-color: #ffffff;
+	margin-left: 1%;
 }
