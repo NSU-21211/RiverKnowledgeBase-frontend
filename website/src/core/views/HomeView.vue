@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import AppSearch from '@/components/home/AppSearch.vue'
+import AppSearch from '@/core/components/home/AppSearch.vue'
 </script>
 
 <style scoped></style>
