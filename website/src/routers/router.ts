@@ -18,7 +18,7 @@ const router = createRouter({
 			component: RiverListView
 		},
 		{
-			path: '/river/info/:riverName', // TODO: user wikidataId instead of riverName
+			path: '/river/info/:riverName', // TODO: use wikidataId instead of riverName
 			name: 'info',
 			component: RiverInfoView,
 			props: true,
