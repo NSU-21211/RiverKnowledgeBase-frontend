@@ -1,24 +1,32 @@
 <template>
-	<div id="river-image">
-		<img ref="imageSrc" alt="Фотография реки" src="" />
+	<div v-if="imageUrl && imageUrl !== 'null'">
+		<div>
+			<img id="river-image" v-fullscreen-img v-bind:src="imageUrl" alt="Фотография реки" />
+		</div>
+	</div>
+	<div v-else>
+		<div>
+			<img
+				id="empty-river-image"
+				v-fullscreen-img
+				src="@/assets/images/default-river-image.webp"
+				alt="Фотография реки не указана"
+			/>
+		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { imageSourceMock } from '@/assets/mocks/mocks'
+import { vFullscreenImg } from 'maz-ui'
 
-const imageSrc = ref<HTMLImageElement>()
-
-// TODO: add dynamic value
-const setImageSource = (imageSource: string) => {
-	imageSrc.value!.src = imageSource
-}
-
-onMounted(() => {
-	let imageSource = imageSourceMock
-	setImageSource(imageSource)
+const props = defineProps({
+	imageSource: {
+		type: String,
+		required: true
+	}
 })
+const imageUrl = props.imageSource
+console.log('Image URL: ', imageUrl)
 </script>
 
 <style scoped></style>

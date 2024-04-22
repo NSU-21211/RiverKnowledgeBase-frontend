@@ -1,15 +1,16 @@
 <template>
 	<div id="river-search">
 		<h1 class="search-title">Информационный сервис о реках</h1>
-		<label for="river-name-input">Введите название реки:</label><br />
-		<input
-			type="text"
-			placeholder="Название реки"
-			maxlength="100"
-			id="river-name-input"
-			v-model="riverName"
-		/>
-		<button @click="searchRiver">Найти</button>
+		<div id="river-search-container" class="center">
+			<input
+				id="river-name-input"
+				type="text"
+				placeholder="Название реки"
+				maxlength="100"
+				v-model="riverName"
+			/>
+			<button id="confirm-river-button" @click="searchRiver">Найти</button>
+		</div>
 	</div>
 </template>
 

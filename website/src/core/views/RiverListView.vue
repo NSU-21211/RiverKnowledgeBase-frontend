@@ -4,11 +4,11 @@
 		<div v-if="isQueryDone">
 			<ul>
 				<li v-for="(river, index) in rivers" :key="index">
-					<a @click="getRiverInfo(river.label)">Река {{ river.label }}</a>
+					<a @click="getRiverInfo(river.id)">Река {{ river.label }}</a>
 					<p>&emsp;территориальная принадлежность:</p>
 					<ul>
 						<li
-							v-for="(territorialUnit, index) in river.administrativeTerritorial"
+							v-for="(territorialUnit, index) in river.administrativeTerritorials"
 							:key="index"
 						>
 							{{ territorialUnit }}
@@ -59,8 +59,8 @@ const getRiverList = async (riverName: string) => {
 }
 getRiverList(riverName)
 
-const getRiverInfo = (riverName: string) => {
-	router.push({ name: 'info', params: { riverName: riverName } })
+const getRiverInfo = (wikidataId: string) => {
+	router.push({ name: 'info', params: { wikidataId: wikidataId } })
 }
 </script>
 

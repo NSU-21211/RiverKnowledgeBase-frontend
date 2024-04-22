@@ -2,6 +2,9 @@
 	<div id="home">
 		<AppSearch />
 	</div>
+	<div id="river-svg-logo">
+		<img src="" alt="" />
+	</div>
 	<section>
 		<router-view />
 	</section>
