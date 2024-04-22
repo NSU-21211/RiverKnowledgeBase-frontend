@@ -1,77 +1,82 @@
 <template>
 	<div id="river-info">
-		<p id="river_name">Название:</p>
-		<p id="river_length">Длина:</p>
-		<p id="river_area">Площадь:</p>
-		<p id="river_origin">Исток водотока:</p>
-		<p id="river_territorial">Административная территория:</p>
-		<p id="river_tributaries">Притоки:</p>
-		<p id="river_country">Страна:</p>
-		<p id="river_mouth">Впадает в:</p>
-		<p id="river-map">Река на карте: <a href="#" id="map-link">link to river</a></p>
+		<div v-if="riverInfo.countries && riverInfo.countries.length">
+			<p>Река находится в следующих странах:</p>
+			<ul id="countries-river">
+				<li v-for="(country, index) in riverInfo.countries" :key="index">
+					{{ country }}
+				</li>
+			</ul>
+		</div>
+		<div
+			v-if="
+				riverInfo.administrative_territorials &&
+				riverInfo.administrative_territorials.length
+			"
+		>
+			<p>Административные территории:</p>
+			<ul id="administrative-territorials-river">
+				<li
+					v-for="(territorialUnit, index) in riverInfo.administrative_territorials"
+					:key="index"
+				>
+					{{ territorialUnit }}
+				</li>
+			</ul>
+		</div>
+		<div v-if="riverInfo.origins && riverInfo.origins.length">
+			<p>Истоки реки:</p>
+			<ul id="origins-river">
+				<li v-for="(origin, index) in riverInfo.origins" :key="index">
+					{{ origin }}
+				</li>
+			</ul>
+		</div>
+		<div v-if="riverInfo.mouths && riverInfo.mouths.length">
+			<p>Река впадает в:</p>
+			<ul id="mouths-river">
+				<li v-for="(mouth, index) in riverInfo.mouths" :key="index">
+					{{ mouth }}
+				</li>
+			</ul>
+		</div>
+		<div v-if="riverInfo.length">
+			<p>Длина: {{ riverInfo.length }} км</p>
+		</div>
+		<div v-if="riverInfo.watershed_area">
+			<p>Площадь бассейна: {{ riverInfo.watershed_area }} км²</p>
+		</div>
+		<div v-if="riverInfo.tributaries && riverInfo.tributaries.length">
+			<p>Притоки реки:</p>
+			<ul id="tributaries-river">
+				<li v-for="(tributary, index) in riverInfo.tributaries" :key="index">
+					{{ tributary }}
+				</li>
+			</ul>
+		</div>
+		<p>
+			Подробная информация:
+			<a v-bind:href="'https://www.wikidata.org/wiki/' + riverInfo.wikidata_id">Wikidata</a>
+		</p>
 	</div>
-	<RiverImage />
+	<RiverImage :imageSource="riverInfo.image" />
 </template>
 
 <script setup lang="ts">
 import RiverImage from '@/core/components/info/RiverImage.vue'
-import { onMounted } from 'vue'
-import { riverInfoResponseJsonMock } from '@/assets/mocks/mocks'
+import type { RiverInfoDto } from '@/core/models/river/RiverInfoDto'
+import { ref } from 'vue'
 
-// TODO: add dynamic parameters
-const parseRiverInfo = (riverInfoResponseJson: string) => {
-	// TODO: add class for it
-	const riverObj = JSON.parse(riverInfoResponseJson)
-
-	let river_name = document.getElementById('river_name')
-	let river_length = document.getElementById('river_length')
-	let river_tributaries = document.getElementById('river_tributaries')
-	let river_area = document.getElementById('river_area')
-	let river_origin = document.getElementById('river_origin')
-	let river_territorial = document.getElementById('river_territorial')
-	let river_mouth = document.getElementById('river_mouth')
-	let river_country = document.getElementById('river_country')
-	let river_image = document.getElementById('river_image')
-
-	if (river_name && !river_name.textContent!.includes(riverObj.label)) {
-		river_name.textContent += riverObj.label
+const props = defineProps({
+	modelValue: {
+		type: Object as () => RiverInfoDto,
+		required: true
 	}
-	if (river_length && !river_length.textContent!.includes(riverObj.length)) {
-		river_length.textContent += riverObj.length + ' км'
-	}
-	if (river_area && !river_area.textContent!.includes(riverObj.watershedArea)) {
-		river_area.textContent += riverObj.watershedArea + ' км^2'
-	}
-	if (
-		river_tributaries &&
-		!river_tributaries.textContent!.includes(riverObj.tributaries.join(', '))
-	) {
-		river_tributaries.textContent += riverObj.tributaries.join(', ')
-	}
-	if (river_origin && !river_origin.textContent!.includes(riverObj.origin)) {
-		river_origin.textContent += riverObj.origin.join(', ')
-	}
-	if (
-		river_territorial &&
-		!river_territorial.textContent!.includes(riverObj.administrativeTerritorial)
-	) {
-		river_territorial.textContent += riverObj.administrativeTerritorial
-	}
-	if (river_mouth && !river_mouth.textContent!.includes(riverObj.mouth.join(', '))) {
-		river_mouth.textContent += riverObj.mouth.join(', ')
-	}
-	if (river_country && !river_country.textContent!.includes(riverObj.country)) {
-		river_country.textContent += riverObj.country
-	}
-	if (river_image) {
-		// TODO: call method from RiverImage
-	}
-}
-
-onMounted(() => {
-	let riverInfoResponseJson = riverInfoResponseJsonMock
-	parseRiverInfo(riverInfoResponseJson)
 })
+const emits = defineEmits(['update:modelValue'])
+
+const internalModelValue = ref(props.modelValue)
+const riverInfo = internalModelValue.value
 </script>
 
 <style scoped></style>

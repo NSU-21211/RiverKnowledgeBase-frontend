@@ -18,13 +18,13 @@ const router = createRouter({
 			component: RiverListView
 		},
 		{
-			path: '/river/info/:riverName', // TODO: use wikidataId instead of riverName
+			path: '/river/info/:wikidataId',
 			name: 'info',
 			component: RiverInfoView,
 			props: true,
 			children: [
 				{
-					path: '/river/scheme/:riverName',
+					path: '/river/scheme/:wikidataId',
 					name: 'scheme',
 					component: LinearSchemeView
 				}
