@@ -27,8 +27,12 @@
 				></span>
 				<span class="sr-only">Пожалуйста, подождите</span>
 			</button>
+			<RiverFacts />
 		</div>
 	</div>
+
+
+
 	<section>
 		<router-view />
 	</section>
@@ -42,6 +46,7 @@ import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import RiverService from '@/core/services/RiverService'
 import type { RiverOverviewDto } from '@/core/models/river/RiverOverviewDto'
+import RiverFacts from '@/core/components/info/RiverFacts.vue'
 
 const router = useRouter()
 

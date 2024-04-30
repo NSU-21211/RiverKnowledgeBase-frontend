@@ -93,11 +93,10 @@ body {
 	left: 0;
 	width: 65%;
 	height: 65%;
-	background-image: url("@/assets/images/river-logo.svg");
+	background-image: url('@/assets/images/river-logo.svg');
 	background-size: contain;
 	background-repeat: no-repeat;
 	z-index: 0;
-
 }
 
 .search-title {
