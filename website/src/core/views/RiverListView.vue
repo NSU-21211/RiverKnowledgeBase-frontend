@@ -27,12 +27,15 @@
 				></span>
 				<span class="sr-only">Пожалуйста, подождите</span>
 			</button>
+			<RiverFacts />
 		</div>
 	</div>
 
-	<RiverFacts />
 
-	<section></section>
+
+	<section>
+		<router-view />
+	</section>
 	<footer>
 		<router-link :to="{ name: 'home' }"> На главную </router-link>
 	</footer>
