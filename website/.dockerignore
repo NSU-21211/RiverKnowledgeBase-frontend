@@ -1,0 +1,8 @@
+!index.html
+!index.tsx
+!vite.config.ts
+!vitest.config.ts
+node_modules
+dist
+.vscode
+.DS_Store

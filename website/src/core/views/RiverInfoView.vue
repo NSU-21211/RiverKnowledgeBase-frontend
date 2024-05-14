@@ -33,7 +33,8 @@ const props = defineProps(['wikidataId'])
 const wikidataId = props.wikidataId
 
 const isQueryDone = ref<boolean>(false)
-const riverInfo: Ref<RiverInfoDto | null> = ref<RiverInfoDto | null>(null)
+const instance: RiverInfoDto = { label: 'Река не указана', image: '' } // FIXME
+const riverInfo: Ref<RiverInfoDto> = ref<RiverInfoDto>(instance)
 
 const getRiverInfo = async (wikidataId: string) => {
 	const response = await RiverService.getRiverInfoByWikidataId(wikidataId)
