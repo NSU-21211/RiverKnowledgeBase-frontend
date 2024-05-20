@@ -1,5 +1,5 @@
 <template>
-	<div id="river-info">
+	<div id="river-info" class="image-offset">
 		<div v-if="riverInfo.countries && riverInfo.countries.length">
 			<p>Река находится в следующих странах:</p>
 			<ul id="countries-river">
@@ -41,10 +41,10 @@
 			</ul>
 		</div>
 		<div v-if="riverInfo.length">
-			<p>Длина: {{ riverInfo.length }} км</p>
+			<p id="length">Длина: {{ riverInfo.length }} км</p>
 		</div>
 		<div v-if="riverInfo.watershed_area">
-			<p>Площадь бассейна: {{ riverInfo.watershed_area }} км²</p>
+			<p id="watershed-area">Площадь бассейна: {{ riverInfo.watershed_area }} км²</p>
 		</div>
 		<div v-if="riverInfo.tributaries && riverInfo.tributaries.length">
 			<p>Притоки реки:</p>
@@ -59,7 +59,7 @@
 			<a v-bind:href="'https://www.wikidata.org/wiki/' + riverInfo.wikidata_id">Wikidata</a>
 		</p>
 	</div>
-	<RiverImage :imageSource="riverInfo.image" />
+	<RiverImage :imageSource="riverInfo.image" class="image-offset" />
 </template>
 
 <script setup lang="ts">

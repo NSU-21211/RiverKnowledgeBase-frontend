@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const RIVER_API_ENDPOINT = 'http://localhost:7875/api/river'
+const RIVER_API_ENDPOINT = 'http://localhost:7890/api/river'
 
 class RiverService {
 	getRiverListByName(riverName: string) {

@@ -1,5 +1,5 @@
 <template>
-	<div id="river-list">
+	<div id="river-list" class="text-center">
 		<h2>Список рек</h2>
 		<div v-if="isQueryDone">
 			<ul>
@@ -30,8 +30,6 @@
 			<RiverFacts />
 		</div>
 	</div>
-
-
 
 	<section>
 		<router-view />

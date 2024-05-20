@@ -3,6 +3,7 @@ import RiverListView from '@/core/views/RiverListView.vue'
 import HomeView from '@/core/views/HomeView.vue'
 import RiverInfoView from '@/core/views/RiverInfoView.vue'
 import LinearSchemeView from '@/core/views/LinearSchemeView.vue'
+import About from '@/core/views/About.vue'
 
 const router = createRouter({
 	routes: [
@@ -16,6 +17,11 @@ const router = createRouter({
 			name: 'list',
 			props: true,
 			component: RiverListView
+		},
+		{
+			path: '/about',
+			name: 'about',
+			component: About
 		},
 		{
 			path: '/river/info/:wikidataId',

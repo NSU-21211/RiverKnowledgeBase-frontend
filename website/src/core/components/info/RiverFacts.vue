@@ -1,5 +1,5 @@
 <template>
-	<div v-if="selectedRiverFacts.length > 0">
+	<div class="container" v-if="selectedRiverFacts.length > 0">
 		<h3>{{ selectedRiverFacts[selectedIndex].factTitle }}</h3>
 		<p>{{ selectedRiverFacts[selectedIndex].fact }}</p>
 		<button @click="previousFact">Назад</button>

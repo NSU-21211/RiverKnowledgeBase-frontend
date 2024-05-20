@@ -1,13 +1,13 @@
 <template>
 	<div v-if="isQueryDone">
 		<h1 id="river-label">Река {{ riverInfo?.label }}</h1>
-		<div id="river-info-and-image">
+		<div id="river-info-and-image" class="river-info-and-image-container">
 			<RiverInfo v-model="riverInfo" />
 			<button @click="router.push({ name: 'scheme' })">Отобразить линейную схему</button>
 		</div>
 	</div>
 	<div v-else>
-		<button class="btn btn-primary" type="button" disabled>
+		<button class="btn btn-primary btn-center" type="button" disabled>
 			<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 			<span class="sr-only">Пожалуйста, подождите</span>
 		</button>
