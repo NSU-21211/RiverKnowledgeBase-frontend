@@ -1,14 +1,14 @@
 <template>
-  <div id="content-wrapper">
-    <div id="scheme-and-legend">
-      <AppHeader />
-      <AppLinearScheme />
-      <AppLinearSchemeLegend />
-    </div>
-    <section>
-      <router-view />
-    </section>
-  </div>
+	<div id="content-wrapper">
+		<div id="scheme-and-legend">
+			<AppHeader />
+			<AppLinearScheme />
+			<AppLinearSchemeLegend />
+		</div>
+		<section>
+			<router-view />
+		</section>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -19,12 +19,12 @@ import AppLinearSchemeLegend from '@/core/components/scheme/LinearSchemeLegend.v
 
 <style scoped>
 #content-wrapper {
-  display: flex;
+	display: flex;
 }
 
 #scheme-and-legend {
-  right: 90px;
-  top: 150px;
-  position: absolute;
+	right: 90px;
+	top: 150px;
+	position: absolute;
 }
 </style>

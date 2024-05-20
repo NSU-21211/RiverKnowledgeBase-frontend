@@ -3,7 +3,7 @@ import RiverListView from '@/core/views/RiverListView.vue'
 import HomeView from '@/core/views/HomeView.vue'
 import RiverInfoView from '@/core/views/RiverInfoView.vue'
 import LinearSchemeView from '@/core/views/LinearSchemeView.vue'
-import About from "@/core/views/About.vue";
+import About from '@/core/views/About.vue'
 
 const router = createRouter({
 	routes: [

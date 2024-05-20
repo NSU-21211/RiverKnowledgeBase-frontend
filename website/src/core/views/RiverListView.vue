@@ -1,44 +1,42 @@
 <template>
-  <div id="river-list" class="text-center">
-    <h2>Список рек</h2>
-    <div v-if="isQueryDone">
-      <ul>
-        <li v-for="(river, index) in rivers" :key="index">
-          <a @click="getRiverInfo(river.id)">Река {{ river.label }}</a>
-          <p>&emsp;территориальная принадлежность:</p>
-          <ul>
-            <li
-                v-for="(territorialUnit, index) in river.administrativeTerritorials"
-                :key="index"
-            >
-              {{ territorialUnit }}
-            </li>
-          </ul>
-          <br />
-        </li>
-      </ul>
-    </div>
-    <div v-else>
-      <button class="btn btn-primary" type="button" disabled>
+	<div id="river-list" class="text-center">
+		<h2>Список рек</h2>
+		<div v-if="isQueryDone">
+			<ul>
+				<li v-for="(river, index) in rivers" :key="index">
+					<a @click="getRiverInfo(river.id)">Река {{ river.label }}</a>
+					<p>&emsp;территориальная принадлежность:</p>
+					<ul>
+						<li
+							v-for="(territorialUnit, index) in river.administrativeTerritorials"
+							:key="index"
+						>
+							{{ territorialUnit }}
+						</li>
+					</ul>
+					<br />
+				</li>
+			</ul>
+		</div>
+		<div v-else>
+			<button class="btn btn-primary" type="button" disabled>
 				<span
-            class="spinner-border spinner-border-sm"
-            role="status"
-            aria-hidden="true"
-        ></span>
-        <span class="sr-only">Пожалуйста, подождите</span>
-      </button>
-      <RiverFacts />
-    </div>
-  </div>
+					class="spinner-border spinner-border-sm"
+					role="status"
+					aria-hidden="true"
+				></span>
+				<span class="sr-only">Пожалуйста, подождите</span>
+			</button>
+			<RiverFacts />
+		</div>
+	</div>
 
-
-
-  <section>
-    <router-view />
-  </section>
-  <footer>
-    <router-link :to="{ name: 'home' }"> На главную </router-link>
-  </footer>
+	<section>
+		<router-view />
+	</section>
+	<footer>
+		<router-link :to="{ name: 'home' }"> На главную </router-link>
+	</footer>
 </template>
 
 <script setup lang="ts">
@@ -57,15 +55,15 @@ const isQueryDone = ref<boolean>(false)
 const rivers = ref<RiverOverviewDto[] | null>(null)
 
 const getRiverList = async (riverName: string) => {
-  const response = await RiverService.getRiverListByName(riverName)
-  rivers.value = response.data
-  isQueryDone.value = true
-  console.log(rivers.value)
+	const response = await RiverService.getRiverListByName(riverName)
+	rivers.value = response.data
+	isQueryDone.value = true
+	console.log(rivers.value)
 }
 getRiverList(riverName)
 
 const getRiverInfo = (wikidataId: string) => {
-  router.push({ name: 'info', params: { wikidataId: wikidataId } })
+	router.push({ name: 'info', params: { wikidataId: wikidataId } })
 }
 </script>
 

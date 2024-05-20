@@ -39,7 +39,6 @@ body {
 	height: 100vh;
 }
 
-
 #river-image {
 	width: 30%;
 	height: auto;
@@ -94,7 +93,6 @@ body {
 	height: 100%;
 	position: absolute;
 }
-
 
 #river-svg-logo {
 	position: fixed;
@@ -179,7 +177,6 @@ body {
 	background-color: #f4f4f4;
 	border-color: #ffffff;
 }
-
 
 #river-image {
 	width: 40%;
@@ -296,7 +293,7 @@ h2 {
 	list-style: none;
 }
 
-.linear-scheme-header{
+.linear-scheme-header {
 	right: 170px;
 	top: -30px;
 	position: absolute;
@@ -385,6 +382,3 @@ a:hover {
 #watershed-area {
 	font-weight: bold;
 }
-
-
-
